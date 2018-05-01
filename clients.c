@@ -332,8 +332,8 @@ void run() {
 	FILE *file1;
 	FILE *file2;
 
-	file1 = fopen("results1", "w");
-	file2 = fopen("results2", "w");
+	file1 = fopen("results1.txt", "w");
+	file2 = fopen("results2.txt", "w");
 
 	printf("Computing %dx%d matrix...\n", NUMBER_OF_PURE_STRATEGIES, NUMBER_OF_PURE_STRATEGIES);
 
@@ -353,13 +353,12 @@ void run() {
 			get_payoffs(play1, play2, payoffs);
 			payoff_matrix1[i][j] = payoffs[0];
 			payoff_matrix2[i][j] = payoffs[1];
-			printf("%f  ", payoff_matrix1[i][j]);
+			fprintf(file1, "%f ", payoffs[0]);
+			fprintf(file2, "%f ", payoffs[1]);
 		}
 
-		printf("\n");
-
-		fwrite(payoff_matrix1[i], sizeof(float), NUMBER_OF_PURE_STRATEGIES, file1);
-		fwrite(payoff_matrix2[i], sizeof(float), NUMBER_OF_PURE_STRATEGIES, file2);
+		fprintf(file1, "\n");
+		fprintf(file2, "\n");
 	}
 
 	fclose(file1);
